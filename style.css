@@ -17,13 +17,16 @@ body {
 
     align-items: center;
 
-    background: linear-gradient(
-        135deg,
-        #141e30,
-        #243b55
-    );
-
     padding: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #141e30,
+            #243b55
+        );
+
+    transition: 0.3s;
 
 }
 
@@ -32,7 +35,7 @@ body {
 
     width: 100%;
 
-    max-width: 380px;
+    max-width: 390px;
 
 }
 
@@ -45,16 +48,16 @@ body {
 
     color: white;
 
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 
 }
 
 
 .profile-image {
 
-    width: 100px;
+    width: 95px;
 
-    height: 100px;
+    height: 95px;
 
     object-fit: cover;
 
@@ -62,16 +65,16 @@ body {
 
     border: 4px solid white;
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
 }
 
 
 .profile h1 {
 
-    font-size: 25px;
+    font-size: 24px;
 
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 
 }
 
@@ -80,16 +83,16 @@ body {
 
     font-size: 14px;
 
-    margin: 5px;
+    margin: 4px;
 
 }
 
 
-.profile a {
+.github-link {
 
     display: inline-block;
 
-    margin-top: 10px;
+    margin-top: 8px;
 
     padding: 7px 18px;
 
@@ -106,11 +109,32 @@ body {
 }
 
 
-.profile a:hover {
+.github-link:hover {
 
-    background-color: white;
+    background: white;
 
     color: #243b55;
+
+}
+
+
+/* Theme */
+
+.theme-button {
+
+    display: block;
+
+    margin: 0 auto 15px;
+
+    padding: 8px 15px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-size: 13px;
 
 }
 
@@ -119,9 +143,9 @@ body {
 
 .calculator {
 
-    background-color: #111;
+    background: #111;
 
-    padding: 20px;
+    padding: 18px;
 
     border-radius: 20px;
 
@@ -133,27 +157,51 @@ body {
 
 /* Display */
 
-#display {
+.display {
 
-    width: 100%;
+    background: #222;
 
-    height: 75px;
+    color: white;
+
+    border-radius: 12px;
+
+    padding: 12px;
 
     margin-bottom: 15px;
 
-    padding: 10px 15px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    font-size: 32px;
-
     text-align: right;
 
-    background-color: #222;
+    min-height: 95px;
 
-    color: white;
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    overflow: hidden;
+
+}
+
+
+#history {
+
+    color: #888;
+
+    font-size: 15px;
+
+    min-height: 20px;
+
+}
+
+
+#display {
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    overflow-x: auto;
 
 }
 
@@ -167,14 +215,14 @@ body {
     grid-template-columns:
         repeat(4, 1fr);
 
-    gap: 10px;
+    gap: 9px;
 
 }
 
 
 button {
 
-    height: 60px;
+    height: 58px;
 
     border: none;
 
@@ -186,27 +234,36 @@ button {
 
     cursor: pointer;
 
-    background-color: #333;
+    background: #333;
 
     color: white;
 
-    transition: 0.2s;
+    transition: 0.15s;
 
 }
 
 
-button:hover {
+.buttons button:hover {
 
-    background-color: #555;
+    transform: scale(1.04);
 
-    transform: scale(1.03);
+    background: #555;
 
 }
 
 
-button:active {
+.buttons button:active {
 
-    transform: scale(0.95);
+    transform: scale(0.94);
+
+}
+
+
+/* Special */
+
+.special {
+
+    background: #666;
 
 }
 
@@ -215,14 +272,14 @@ button:active {
 
 .operator {
 
-    background-color: #ff9500;
+    background: #ff9500;
 
 }
 
 
 .operator:hover {
 
-    background-color: #e68900;
+    background: #e68900 !important;
 
 }
 
@@ -231,23 +288,87 @@ button:active {
 
 .equal {
 
-    background-color: #28a745;
+    background: #28a745;
 
 }
 
 
 .equal:hover {
 
-    background-color: #218838;
+    background: #218838 !important;
 
 }
 
 
-/* Zero button */
+/* Zero */
 
 .zero {
 
     grid-column: span 2;
+
+}
+
+
+/* Light Theme */
+
+body.light {
+
+    background:
+        linear-gradient(
+            135deg,
+            #e0eafc,
+            #cfdef3
+        );
+
+}
+
+
+body.light .calculator {
+
+    background: #f5f5f5;
+
+}
+
+
+body.light .display {
+
+    background: white;
+
+    color: #111;
+
+}
+
+
+body.light #display {
+
+    color: #111;
+
+}
+
+
+body.light .buttons button {
+
+    background: #ddd;
+
+    color: #111;
+
+}
+
+
+body.light .operator {
+
+    background: #ff9500 !important;
+
+    color: white !important;
+
+}
+
+
+body.light .equal {
+
+    background: #28a745 !important;
+
+    color: white !important;
 
 }
 
@@ -262,7 +383,7 @@ footer {
 
     font-size: 12px;
 
-    margin-top: 20px;
+    margin-top: 15px;
 
     opacity: 0.8;
 
@@ -275,28 +396,28 @@ footer {
 
     body {
 
-        padding: 15px;
+        padding: 12px;
 
     }
 
 
     .calculator {
 
-        padding: 15px;
+        padding: 14px;
 
     }
 
 
     button {
 
-        height: 55px;
+        height: 54px;
 
     }
 
 
     #display {
 
-        font-size: 28px;
+        font-size: 30px;
 
     }
 

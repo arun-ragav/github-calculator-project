@@ -2,30 +2,24 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Arun Ragav | Calculator</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
     <div class="container">
 
-        <!-- Personal Information -->
+        <!-- Profile -->
+        <header class="profile">
 
-        <div class="profile">
-
-            <img
-                src="G.K.G.Arun Ragav.png"
-                alt="G.K.G. Arun Ragav"
-                class="profile-image"
-            >
+            <img src="G.K.G.Arun Ragav.png"
+                 alt="G.K.G. Arun Ragav"
+                 class="profile-image">
 
             <h1>G.K.G. Arun Ragav</h1>
 
@@ -33,126 +27,139 @@
 
             <p>St. Joseph University, Palanchur</p>
 
-            <a
-                href="https://github.com/arun-ragav"
-                target="_blank"
-            >
+            <a href="https://github.com/arun-ragav"
+               target="_blank"
+               class="github-link">
                 GitHub
             </a>
 
-        </div>
+        </header>
+
+
+        <!-- Theme Button -->
+
+        <button class="theme-button"
+                onclick="toggleTheme()">
+            🌙 Dark / ☀️ Light
+        </button>
 
 
         <!-- Calculator -->
 
-        <div class="calculator">
+        <main class="calculator">
 
-            <input
-                type="text"
-                id="display"
-                value="0"
-                readonly
-            >
+            <div class="display">
+
+                <div id="history"></div>
+
+                <div id="display">
+                    0
+                </div>
+
+            </div>
 
 
             <div class="buttons">
 
-                <button onclick="clearDisplay()">
+                <button class="special"
+                        onclick="clearCalculator()">
                     AC
                 </button>
 
-                <button onclick="deleteNumber()">
+                <button class="special"
+                        onclick="deleteNumber()">
                     DEL
                 </button>
 
-                <button onclick="appendValue('%')">
+                <button class="special"
+                        onclick="percentage()">
                     %
                 </button>
 
-                <button class="operator" onclick="appendValue('/')">
+                <button class="operator"
+                        onclick="chooseOperator('/')">
                     ÷
                 </button>
 
 
-                <button onclick="appendValue('7')">
+                <button onclick="appendNumber('7')">
                     7
                 </button>
 
-                <button onclick="appendValue('8')">
+                <button onclick="appendNumber('8')">
                     8
                 </button>
 
-                <button onclick="appendValue('9')">
+                <button onclick="appendNumber('9')">
                     9
                 </button>
 
-                <button class="operator" onclick="appendValue('*')">
+                <button class="operator"
+                        onclick="chooseOperator('*')">
                     ×
                 </button>
 
 
-                <button onclick="appendValue('4')">
+                <button onclick="appendNumber('4')">
                     4
                 </button>
 
-                <button onclick="appendValue('5')">
+                <button onclick="appendNumber('5')">
                     5
                 </button>
 
-                <button onclick="appendValue('6')">
+                <button onclick="appendNumber('6')">
                     6
                 </button>
 
-                <button class="operator" onclick="appendValue('-')">
+                <button class="operator"
+                        onclick="chooseOperator('-')">
                     −
                 </button>
 
 
-                <button onclick="appendValue('1')">
+                <button onclick="appendNumber('1')">
                     1
                 </button>
 
-                <button onclick="appendValue('2')">
+                <button onclick="appendNumber('2')">
                     2
                 </button>
 
-                <button onclick="appendValue('3')">
+                <button onclick="appendNumber('3')">
                     3
                 </button>
 
-                <button class="operator" onclick="appendValue('+')">
+                <button class="operator"
+                        onclick="chooseOperator('+')">
                     +
                 </button>
 
 
-                <button
-                    onclick="appendValue('0')"
-                    class="zero"
-                >
+                <button class="zero"
+                        onclick="appendNumber('0')">
                     0
                 </button>
 
-                <button onclick="appendValue('.')">
+                <button onclick="appendDecimal()">
                     .
                 </button>
 
-                <button
-                    onclick="calculate()"
-                    class="equal"
-                >
+                <button class="equal"
+                        onclick="calculate()">
                     =
                 </button>
 
             </div>
 
-        </div>
+        </main>
 
 
         <!-- Footer -->
 
         <footer>
 
-            <p>Built with HTML, CSS & JavaScript</p>
+            <p>Built with HTML • CSS • JavaScript</p>
 
             <p>© 2026 G.K.G. Arun Ragav</p>
 
