@@ -145,7 +145,7 @@ in your web browser.
 After enabling GitHub Pages, replace the above text with:
 
 ```text
-https://YOUR-USERNAME.github.io/calculator-project/
+ https://arun-ragav.github.io/github-calculator-project/
 ```
 
 ---
