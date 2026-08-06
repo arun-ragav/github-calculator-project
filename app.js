@@ -1,52 +1,25 @@
 let currentNumber = "";
 let previousNumber = "";
-
 let operator = null;
 
-let shouldResetDisplay = false;
+const display = document.getElementById("display");
 
 
-// Get elements
-
-const display =
-    document.getElementById("display");
-
-const history =
-    document.getElementById("history");
-
-
-// Add number
-
+// Number buttons
 function appendNumber(number) {
 
-    if (
-        currentNumber === "0" ||
-        shouldResetDisplay
-    ) {
-
+    if (currentNumber === "0") {
         currentNumber = "";
-
-        shouldResetDisplay = false;
-
     }
 
     currentNumber += number;
 
-    updateDisplay();
+    display.innerText = currentNumber;
 }
 
 
-// Add decimal
-
+// Decimal button
 function appendDecimal() {
-
-    if (shouldResetDisplay) {
-
-        currentNumber = "";
-
-        shouldResetDisplay = false;
-
-    }
 
     if (!currentNumber.includes(".")) {
 
@@ -57,37 +30,27 @@ function appendDecimal() {
 
     }
 
-    updateDisplay();
+    display.innerText = currentNumber;
 }
 
 
-// Choose operator
-
+// Select operator
 function chooseOperator(selectedOperator) {
 
     if (currentNumber === "") {
         return;
     }
 
-
-    if (previousNumber !== "") {
-
-        calculate();
-
-    }
-
+    previousNumber = currentNumber;
 
     operator = selectedOperator;
 
-    previousNumber = currentNumber;
-
-    shouldResetDisplay = true;
+    currentNumber = "";
 
 }
 
 
 // Calculate
-
 function calculate() {
 
     if (
@@ -95,139 +58,82 @@ function calculate() {
         currentNumber === "" ||
         operator === null
     ) {
-
         return;
-
     }
 
-
-    const previous =
-        parseFloat(previousNumber);
-
-    const current =
-        parseFloat(currentNumber);
-
+    let previous = Number(previousNumber);
+    let current = Number(currentNumber);
 
     let result;
 
 
-    switch (operator) {
+    if (operator === "+") {
+        result = previous + current;
+    }
 
-        case "+":
+    else if (operator === "-") {
+        result = previous - current;
+    }
 
-            result =
-                previous + current;
+    else if (operator === "*") {
+        result = previous * current;
+    }
 
-            break;
+    else if (operator === "/") {
 
+        if (current === 0) {
 
-        case "-":
+            display.innerText = "Error";
 
-            result =
-                previous - current;
+            currentNumber = "";
+            previousNumber = "";
+            operator = null;
 
-            break;
+            return;
+        }
 
-
-        case "*":
-
-            result =
-                previous * current;
-
-            break;
-
-
-        case "/":
-
-            if (current === 0) {
-
-                display.innerText =
-                    "Cannot divide by 0";
-
-                currentNumber = "";
-
-                previousNumber = "";
-
-                operator = null;
-
-                return;
-
-            }
-
-            result =
-                previous / current;
-
-            break;
-
+        result = previous / current;
     }
 
 
-    history.innerText =
-        `${previous} ${getOperatorSymbol(operator)} ${current} =`;
-
-
-    currentNumber =
-        roundResult(result).toString();
+    currentNumber = result.toString();
 
     previousNumber = "";
 
     operator = null;
 
-    shouldResetDisplay = true;
-
-
-    updateDisplay();
-
+    display.innerText = currentNumber;
 }
 
 
 // Percentage
-
 function percentage() {
 
-    if (currentNumber === "") {
-        return;
+    if (currentNumber !== "") {
+
+        currentNumber =
+            (Number(currentNumber) / 100).toString();
+
+        display.innerText = currentNumber;
     }
-
-
-    currentNumber =
-        (parseFloat(currentNumber) / 100).toString();
-
-
-    updateDisplay();
-
 }
 
 
 // Delete
-
 function deleteNumber() {
-
-    if (shouldResetDisplay) {
-
-        return;
-
-    }
-
 
     currentNumber =
         currentNumber.slice(0, -1);
 
-
     if (currentNumber === "") {
-
         currentNumber = "0";
-
     }
 
-
-    updateDisplay();
-
+    display.innerText = currentNumber;
 }
 
 
 // Clear
-
 function clearCalculator() {
 
     currentNumber = "";
@@ -236,157 +142,11 @@ function clearCalculator() {
 
     operator = null;
 
-    shouldResetDisplay = false;
-
-    history.innerText = "";
-
-    updateDisplay();
-
+    display.innerText = "0";
 }
-
-
-// Update display
-
-function updateDisplay() {
-
-    display.innerText =
-        currentNumber || "0";
-
-}
-
-
-// Operator symbols
-
-function getOperatorSymbol(operator) {
-
-    switch (operator) {
-
-        case "+":
-            return "+";
-
-        case "-":
-            return "−";
-
-        case "*":
-            return "×";
-
-        case "/":
-            return "÷";
-
-        default:
-            return "";
-
-    }
-
-}
-
-
-// Round long decimal results
-
-function roundResult(number) {
-
-    return Math.round(
-        (number + Number.EPSILON) * 100000000
-    ) / 100000000;
-
-}
-
-
-// Theme
-
+// Change Dark / Light Theme
 function toggleTheme() {
 
     document.body.classList.toggle("light");
 
 }
-
-
-// Keyboard support
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        const key = event.key;
-
-
-        // Numbers
-
-        if (
-            key >= "0" &&
-            key <= "9"
-        ) {
-
-            appendNumber(key);
-
-        }
-
-
-        // Decimal
-
-        if (key === ".") {
-
-            appendDecimal();
-
-        }
-
-
-        // Operators
-
-        if (
-            key === "+" ||
-            key === "-" ||
-            key === "*" ||
-            key === "/"
-        ) {
-
-            chooseOperator(key);
-
-        }
-
-
-        // Enter
-
-        if (
-            key === "Enter" ||
-            key === "="
-        ) {
-
-            calculate();
-
-        }
-
-
-        // Backspace
-
-        if (key === "Backspace") {
-
-            deleteNumber();
-
-        }
-
-
-        // Escape
-
-        if (key === "Escape") {
-
-            clearCalculator();
-
-        }
-
-
-        // Percentage
-
-        if (key === "%") {
-
-            percentage();
-
-        }
-
-    }
-);
-
-
-// Start display
-
-updateDisplay();
