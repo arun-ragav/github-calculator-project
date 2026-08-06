@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Arun Ragav | Smart Calculator</title>
+    <title>Arun Ragav | Advanced Calculator</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,19 +15,17 @@
     <div class="container">
 
         <!-- Profile -->
-
         <header class="profile">
 
             <img
                 src="G.K.G.Arun Ragav.png"
-                alt="G.K.G.Arun Ragav"
+                alt="G.K.G. Arun Ragav"
                 class="profile-image"
             >
 
             <h1>G.K.G. Arun Ragav</h1>
 
             <p>B.Tech CSE (Applied AI)</p>
-
             <p>St. Joseph University, Palanchur</p>
 
             <a
@@ -42,24 +40,21 @@
 
 
         <!-- Theme -->
-
         <button
             class="theme-button"
             onclick="toggleTheme()"
         >
-            🌙 / ☀️ Theme
+            🌙 Dark / ☀️ Light
         </button>
 
 
-        <!-- Main Calculator -->
-
+        <!-- Calculator -->
         <main class="calculator">
 
             <!-- Display -->
-
             <div class="display">
 
-                <div id="history-display"></div>
+                <div id="expression"></div>
 
                 <div id="display">
                     0
@@ -69,7 +64,6 @@
 
 
             <!-- Copy -->
-
             <button
                 class="copy-button"
                 onclick="copyResult()"
@@ -78,39 +72,46 @@
             </button>
 
 
-            <!-- Calculator Buttons -->
-
+            <!-- Buttons -->
             <div class="buttons">
 
-                <button
-                    class="special"
-                    onclick="clearCalculator()"
-                >
+                <!-- Row 1 -->
+                <button class="special" onclick="clearCalculator()">
                     AC
                 </button>
 
-                <button
-                    class="special"
-                    onclick="deleteNumber()"
-                >
+                <button class="special" onclick="deleteNumber()">
                     DEL
                 </button>
 
-                <button
-                    class="special"
-                    onclick="percentage()"
-                >
-                    %
+                <button class="special" onclick="toggleSign()">
+                    ±
                 </button>
 
-                <button
-                    class="operator"
-                    onclick="chooseOperator('/')"
-                >
+                <button class="operator" onclick="chooseOperator('/')">
                     ÷
                 </button>
 
 
+                <!-- Row 2 -->
+                <button onclick="squareRoot()">
+                    √
+                </button>
+
+                <button onclick="squareNumber()">
+                    x²
+                </button>
+
+                <button onclick="reciprocal()">
+                    1/x
+                </button>
+
+                <button class="operator" onclick="chooseOperator('*')">
+                    ×
+                </button>
+
+
+                <!-- Row 3 -->
                 <button onclick="appendNumber('7')">
                     7
                 </button>
@@ -123,14 +124,12 @@
                     9
                 </button>
 
-                <button
-                    class="operator"
-                    onclick="chooseOperator('*')"
-                >
-                    ×
+                <button class="operator" onclick="chooseOperator('-')">
+                    −
                 </button>
 
 
+                <!-- Row 4 -->
                 <button onclick="appendNumber('4')">
                     4
                 </button>
@@ -143,14 +142,12 @@
                     6
                 </button>
 
-                <button
-                    class="operator"
-                    onclick="chooseOperator('-')"
-                >
-                    −
+                <button class="operator" onclick="chooseOperator('+')">
+                    +
                 </button>
 
 
+                <!-- Row 5 -->
                 <button onclick="appendNumber('1')">
                     1
                 </button>
@@ -163,18 +160,13 @@
                     3
                 </button>
 
-                <button
-                    class="operator"
-                    onclick="chooseOperator('+')"
-                >
-                    +
+                <button class="operator" onclick="choosePower()">
+                    xʸ
                 </button>
 
 
-                <button
-                    class="zero"
-                    onclick="appendNumber('0')"
-                >
+                <!-- Row 6 -->
+                <button class="zero" onclick="appendNumber('0')">
                     0
                 </button>
 
@@ -182,10 +174,11 @@
                     .
                 </button>
 
-                <button
-                    class="equal"
-                    onclick="calculate()"
-                >
+                <button class="special" onclick="percentage()">
+                    %
+                </button>
+
+                <button class="equal" onclick="calculate()">
                     =
                 </button>
 
@@ -195,7 +188,6 @@
 
 
         <!-- History -->
-
         <section class="history-section">
 
             <div class="history-header">
@@ -214,8 +206,9 @@
 
 
         <!-- Footer -->
-
         <footer>
+
+            <p>Advanced Calculator</p>
 
             <p>Built with HTML • CSS • JavaScript</p>
 
