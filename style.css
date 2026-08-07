@@ -1,3 +1,7 @@
+/* ============================= */
+/* RESET */
+/* ============================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,41 +9,64 @@
 }
 
 
+/* ============================= */
+/* BODY */
+/* ============================= */
+
 body {
-    font-family: Arial, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     min-height: 100vh;
 
     padding: 25px 15px;
 
-    background: linear-gradient(
-        135deg,
-        #141e30,
-        #243b55
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #141e30,
+            #243b55
+        );
 
     transition: 0.3s;
 }
 
 
+/* ============================= */
+/* CONTAINER */
+/* ============================= */
+
 .container {
+
     width: 100%;
-    max-width: 420px;
+
+    max-width: 480px;
+
     margin: auto;
 }
 
 
-/* Profile */
+/* ============================= */
+/* PROFILE */
+/* ============================= */
 
 .profile {
+
     text-align: center;
+
     color: white;
+
     margin-bottom: 15px;
 }
 
 
 .profile-image {
+
     width: 100px;
+
     height: 100px;
 
     object-fit: cover;
@@ -53,18 +80,23 @@ body {
 
 
 .profile h1 {
+
     font-size: 25px;
+
     margin-bottom: 5px;
 }
 
 
 .profile p {
+
     font-size: 14px;
+
     margin: 4px;
 }
 
 
 .github-link {
+
     display: inline-block;
 
     margin-top: 8px;
@@ -86,14 +118,19 @@ body {
 
 
 .github-link:hover {
+
     background: white;
+
     color: #243b55;
 }
 
 
-/* Theme */
+/* ============================= */
+/* THEME BUTTON */
+/* ============================= */
 
 .theme-button {
+
     display: block;
 
     margin: 0 auto 15px;
@@ -107,12 +144,19 @@ body {
     cursor: pointer;
 
     font-weight: bold;
+
+    background: white;
+
+    color: #222;
 }
 
 
-/* Calculator */
+/* ============================= */
+/* CALCULATOR */
+/* ============================= */
 
 .calculator {
+
     background: #111;
 
     padding: 18px;
@@ -120,18 +164,22 @@ body {
     border-radius: 20px;
 
     box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.5);
+        0 15px 40px
+        rgba(0, 0, 0, 0.5);
 }
 
 
-/* Display */
+/* ============================= */
+/* DISPLAY */
+/* ============================= */
 
 .display {
+
     background: #222;
 
     color: white;
 
-    min-height: 105px;
+    min-height: 110px;
 
     padding: 12px;
 
@@ -152,18 +200,20 @@ body {
 
 
 #expression {
+
     min-height: 22px;
 
     color: #888;
 
-    font-size: 15px;
+    font-size: 14px;
 
     margin-bottom: 5px;
 }
 
 
 #display {
-    font-size: 35px;
+
+    font-size: 32px;
 
     font-weight: bold;
 
@@ -173,14 +223,17 @@ body {
 }
 
 
-/* Copy */
+/* ============================= */
+/* COPY BUTTON */
+/* ============================= */
 
 .copy-button {
+
     width: 100%;
 
     height: 40px;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     border: none;
 
@@ -192,27 +245,186 @@ body {
 
     cursor: pointer;
 
-    font-size: 14px;
+    font-weight: bold;
 }
 
 
 .copy-button:hover {
+
     background: #777;
 }
 
 
-/* Buttons */
+/* ============================= */
+/* TOP BUTTONS */
+/* ============================= */
 
-.buttons {
+.top-buttons {
+
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 9px;
+
+    margin-bottom: 10px;
+}
+
+
+.top-buttons button {
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: white;
+
+    transition: 0.15s;
+}
+
+
+.top-buttons button:hover {
+
+    transform: scale(1.04);
+}
+
+
+.top-buttons .special {
+
+    background: #666;
+}
+
+
+.top-buttons .equal {
+
+    background: #28a745;
+}
+
+
+/* ============================= */
+/* MEMORY BUTTONS */
+/* ============================= */
+
+.memory-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+
+.memory-buttons button {
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #555;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+
+.memory-buttons button:hover {
+
+    background: #777;
+
+    transform: scale(1.03);
+}
+
+
+/* ============================= */
+/* SCIENTIFIC BUTTONS */
+/* ============================= */
+
+.scientific-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+
+.scientific-buttons button {
+
+    min-height: 43px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #394b5f;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+
+.scientific-buttons button:hover {
+
+    background: #536b83;
+
+    transform: scale(1.03);
+}
+
+
+.scientific-buttons button:active {
+
+    transform: scale(0.95);
+}
+
+
+/* ============================= */
+/* MAIN NUMBER BUTTONS */
+/* ============================= */
+
+.buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 9px;
 }
 
 
 .buttons button {
+
     height: 58px;
 
     border: none;
@@ -234,6 +446,7 @@ body {
 
 
 .buttons button:hover {
+
     transform: scale(1.04);
 
     background: #555;
@@ -241,46 +454,68 @@ body {
 
 
 .buttons button:active {
+
     transform: scale(0.94);
 }
 
 
-/* Special */
+/* ============================= */
+/* SPECIAL */
+/* ============================= */
 
 .special {
+
     background: #666 !important;
 }
 
 
-/* Operators */
+/* ============================= */
+/* OPERATORS */
+/* ============================= */
 
 .operator {
+
     background: #ff9500 !important;
+
+    color: white !important;
 }
 
 
-/* Equal */
+/* ============================= */
+/* EQUAL */
+/* ============================= */
 
 .equal {
+
     background: #28a745 !important;
+
+    color: white !important;
 }
 
 
-/* Zero */
+/* ============================= */
+/* ZERO */
+/* ============================= */
 
 .zero {
-    grid-column: span 2;
+
+    grid-column:
+        span 4;
 }
 
 
-/* History */
+/* ============================= */
+/* HISTORY */
+/* ============================= */
 
 .history-section {
+
     margin-top: 20px;
 
     padding: 15px;
 
-    background: rgba(0, 0, 0, 0.35);
+    background:
+        rgba(0, 0, 0, 0.35);
 
     border-radius: 15px;
 
@@ -289,6 +524,7 @@ body {
 
 
 .history-header {
+
     display: flex;
 
     justify-content: space-between;
@@ -300,11 +536,13 @@ body {
 
 
 .history-header h2 {
+
     font-size: 18px;
 }
 
 
 .history-header button {
+
     border: none;
 
     background: #d9534f;
@@ -320,6 +558,7 @@ body {
 
 
 #history-list {
+
     list-style: none;
 
     max-height: 200px;
@@ -329,88 +568,26 @@ body {
 
 
 #history-list li {
+
     padding: 9px;
 
     margin-bottom: 6px;
 
     border-radius: 7px;
 
-    background: rgba(255, 255, 255, 0.1);
+    background:
+        rgba(255, 255, 255, 0.1);
 
     font-size: 14px;
 }
 
 
-/* Light Theme */
-
-body.light {
-    background: linear-gradient(
-        135deg,
-        #e0eafc,
-        #cfdef3
-    );
-}
-
-
-body.light .calculator {
-    background: #f5f5f5;
-}
-
-
-body.light .display {
-    background: white;
-    color: #111;
-}
-
-
-body.light #display {
-    color: #111;
-}
-
-
-body.light #expression {
-    color: #666;
-}
-
-
-body.light .buttons button {
-    background: #ddd;
-    color: #111;
-}
-
-
-body.light .special {
-    background: #aaa !important;
-}
-
-
-body.light .operator {
-    background: #ff9500 !important;
-    color: white !important;
-}
-
-
-body.light .equal {
-    background: #28a745 !important;
-    color: white !important;
-}
-
-
-body.light .history-section {
-    background: rgba(255, 255, 255, 0.8);
-
-    color: #111;
-}
-
-
-body.light #history-list li {
-    background: rgba(0, 0, 0, 0.08);
-}
-
-
-/* Footer */
+/* ============================= */
+/* FOOTER */
+/* ============================= */
 
 footer {
+
     text-align: center;
 
     color: white;
@@ -425,29 +602,220 @@ footer {
 }
 
 
-/* Mobile */
+/* ============================= */
+/* LIGHT THEME */
+/* ============================= */
+
+body.light {
+
+    background:
+        linear-gradient(
+            135deg,
+            #e0eafc,
+            #cfdef3
+        );
+}
+
+
+body.light .profile {
+
+    color: #111;
+}
+
+
+body.light .profile-image {
+
+    border-color: #222;
+}
+
+
+body.light .github-link {
+
+    color: #111;
+
+    border-color: #111;
+}
+
+
+body.light .github-link:hover {
+
+    background: #111;
+
+    color: white;
+}
+
+
+body.light .calculator {
+
+    background: #f5f5f5;
+}
+
+
+body.light .display {
+
+    background: white;
+
+    color: #111;
+}
+
+
+body.light #display {
+
+    color: #111;
+}
+
+
+body.light #expression {
+
+    color: #666;
+}
+
+
+body.light .buttons button {
+
+    background: #ddd;
+
+    color: #111;
+}
+
+
+body.light .scientific-buttons button {
+
+    background: #d1d8e0;
+
+    color: #111;
+}
+
+
+body.light .memory-buttons button {
+
+    background: #aaa;
+
+    color: #111;
+}
+
+
+body.light .special {
+
+    background: #aaa !important;
+
+    color: #111 !important;
+}
+
+
+body.light .operator {
+
+    background: #ff9500 !important;
+
+    color: white !important;
+}
+
+
+body.light .equal {
+
+    background: #28a745 !important;
+
+    color: white !important;
+}
+
+
+body.light .top-buttons .special {
+
+    background: #aaa;
+}
+
+
+body.light .history-section {
+
+    background:
+        rgba(255, 255, 255, 0.8);
+
+    color: #111;
+}
+
+
+body.light #history-list li {
+
+    background:
+        rgba(0, 0, 0, 0.08);
+}
+
+
+body.light footer {
+
+    color: #111;
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
 
 @media (max-width: 450px) {
 
     body {
-        padding: 15px 10px;
+
+        padding: 15px 8px;
     }
 
 
     .calculator {
-        padding: 14px;
+
+        padding: 12px;
+    }
+
+
+    .profile h1 {
+
+        font-size: 21px;
+    }
+
+
+    .scientific-buttons {
+
+        gap: 5px;
+    }
+
+
+    .scientific-buttons button {
+
+        min-height: 40px;
+
+        font-size: 12px;
+    }
+
+
+    .buttons {
+
+        gap: 7px;
     }
 
 
     .buttons button {
-        height: 54px;
+
+        height: 52px;
 
         font-size: 17px;
     }
 
 
+    .top-buttons {
+
+        gap: 7px;
+    }
+
+
+    .top-buttons button {
+
+        height: 50px;
+
+        font-size: 16px;
+    }
+
+
     #display {
-        font-size: 30px;
+
+        font-size: 28px;
     }
 
 }

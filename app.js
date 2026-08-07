@@ -1,12 +1,21 @@
+/* ============================= */
+/* VARIABLES */
+/* ============================= */
+
 let currentNumber = "";
+
 let previousNumber = "";
 
 let operator = null;
 
 let shouldResetDisplay = false;
 
+let memory = 0;
 
-// Elements
+
+/* ============================= */
+/* ELEMENTS */
+/* ============================= */
 
 const display =
     document.getElementById("display");
@@ -18,9 +27,21 @@ const historyList =
     document.getElementById("history-list");
 
 
-// -------------------------
-// Numbers
-// -------------------------
+/* ============================= */
+/* UPDATE DISPLAY */
+/* ============================= */
+
+function updateDisplay() {
+
+    display.innerText =
+        currentNumber || "0";
+
+}
+
+
+/* ============================= */
+/* ADD NUMBER */
+/* ============================= */
 
 function appendNumber(number) {
 
@@ -32,19 +53,19 @@ function appendNumber(number) {
         currentNumber = "";
 
         shouldResetDisplay = false;
-
     }
 
 
     currentNumber += number;
 
     updateDisplay();
+
 }
 
 
-// -------------------------
-// Decimal
-// -------------------------
+/* ============================= */
+/* DECIMAL */
+/* ============================= */
 
 function appendDecimal() {
 
@@ -53,7 +74,6 @@ function appendDecimal() {
         currentNumber = "";
 
         shouldResetDisplay = false;
-
     }
 
 
@@ -63,21 +83,80 @@ function appendDecimal() {
             currentNumber === ""
                 ? "0."
                 : currentNumber + ".";
-
     }
 
 
     updateDisplay();
+
 }
 
 
-// -------------------------
-// Operators
-// -------------------------
+/* ============================= */
+/* CONSTANTS */
+/* ============================= */
+
+function appendConstant(type) {
+
+    if (shouldResetDisplay) {
+
+        currentNumber = "";
+
+        shouldResetDisplay = false;
+    }
+
+
+    let value;
+
+
+    if (type === "pi") {
+
+        value = Math.PI;
+
+    } else {
+
+        value = Math.E;
+
+    }
+
+
+    currentNumber =
+        roundResult(value).toString();
+
+
+    updateDisplay();
+
+}
+
+
+/* ============================= */
+/* INSERT TEXT */
+/* ============================= */
+
+function insertText(text) {
+
+    if (shouldResetDisplay) {
+
+        currentNumber = "";
+
+        shouldResetDisplay = false;
+    }
+
+
+    currentNumber += text;
+
+    updateDisplay();
+
+}
+
+
+/* ============================= */
+/* BASIC OPERATOR */
+/* ============================= */
 
 function chooseOperator(selectedOperator) {
 
     if (currentNumber === "") {
+
         return;
     }
 
@@ -89,9 +168,11 @@ function chooseOperator(selectedOperator) {
     }
 
 
-    operator = selectedOperator;
+    operator =
+        selectedOperator;
 
-    previousNumber = currentNumber;
+    previousNumber =
+        currentNumber;
 
     shouldResetDisplay = true;
 
@@ -102,9 +183,9 @@ function chooseOperator(selectedOperator) {
 }
 
 
-// -------------------------
-// Power
-// -------------------------
+/* ============================= */
+/* POWER */
+/* ============================= */
 
 function choosePower() {
 
@@ -113,9 +194,9 @@ function choosePower() {
 }
 
 
-// -------------------------
-// Calculate
-// -------------------------
+/* ============================= */
+/* CALCULATE */
+/* ============================= */
 
 function calculate() {
 
@@ -126,7 +207,6 @@ function calculate() {
     ) {
 
         return;
-
     }
 
 
@@ -175,8 +255,8 @@ function calculate() {
                 );
 
                 return;
-
             }
+
 
             result =
                 previous / current;
@@ -193,6 +273,11 @@ function calculate() {
                 );
 
             break;
+
+
+        default:
+
+            return;
 
     }
 
@@ -228,13 +313,145 @@ function calculate() {
 }
 
 
-// -------------------------
-// Square
-// -------------------------
+/* ============================= */
+/* SCIENTIFIC FUNCTIONS */
+/* ============================= */
+
+function calculateFunction(type) {
+
+    if (currentNumber === "") {
+
+        return;
+    }
+
+
+    const number =
+        parseFloat(currentNumber);
+
+
+    let result;
+
+
+    switch (type) {
+
+        case "sin":
+
+            result =
+                Math.sin(
+                    degreesToRadians(number)
+                );
+
+            break;
+
+
+        case "cos":
+
+            result =
+                Math.cos(
+                    degreesToRadians(number)
+                );
+
+            break;
+
+
+        case "tan":
+
+            result =
+                Math.tan(
+                    degreesToRadians(number)
+                );
+
+            break;
+
+
+        case "log":
+
+            if (number <= 0) {
+
+                showError(
+                    "Invalid log"
+                );
+
+                return;
+            }
+
+
+            result =
+                Math.log10(number);
+
+            break;
+
+
+        case "ln":
+
+            if (number <= 0) {
+
+                showError(
+                    "Invalid ln"
+                );
+
+                return;
+            }
+
+
+            result =
+                Math.log(number);
+
+            break;
+
+
+        default:
+
+            return;
+
+    }
+
+
+    result =
+        roundResult(result);
+
+
+    addHistory(
+        `${type}(${number}) = ${result}`
+    );
+
+
+    expression.innerText =
+        `${type}(${number}) =`;
+
+
+    currentNumber =
+        result.toString();
+
+
+    shouldResetDisplay = true;
+
+
+    updateDisplay();
+
+}
+
+
+/* ============================= */
+/* DEGREES TO RADIANS */
+/* ============================= */
+
+function degreesToRadians(degrees) {
+
+    return degrees *
+        (Math.PI / 180);
+
+}
+
+
+/* ============================= */
+/* SQUARE */
+/* ============================= */
 
 function squareNumber() {
 
     if (currentNumber === "") {
+
         return;
     }
 
@@ -270,13 +487,14 @@ function squareNumber() {
 }
 
 
-// -------------------------
-// Square Root
-// -------------------------
+/* ============================= */
+/* SQUARE ROOT */
+/* ============================= */
 
 function squareRoot() {
 
     if (currentNumber === "") {
+
         return;
     }
 
@@ -292,7 +510,6 @@ function squareRoot() {
         );
 
         return;
-
     }
 
 
@@ -323,13 +540,88 @@ function squareRoot() {
 }
 
 
-// -------------------------
-// Reciprocal
-// -------------------------
+/* ============================= */
+/* FACTORIAL */
+/* ============================= */
+
+function factorial() {
+
+    if (currentNumber === "") {
+
+        return;
+    }
+
+
+    const number =
+        parseFloat(currentNumber);
+
+
+    if (
+        number < 0 ||
+        !Number.isInteger(number)
+    ) {
+
+        showError(
+            "Factorial needs a positive integer"
+        );
+
+        return;
+    }
+
+
+    if (number > 170) {
+
+        showError(
+            "Number too large"
+        );
+
+        return;
+    }
+
+
+    let result = 1;
+
+
+    for (
+        let i = 2;
+        i <= number;
+        i++
+    ) {
+
+        result *= i;
+
+    }
+
+
+    addHistory(
+        `${number}! = ${result}`
+    );
+
+
+    expression.innerText =
+        `${number}! =`;
+
+
+    currentNumber =
+        result.toString();
+
+
+    shouldResetDisplay = true;
+
+
+    updateDisplay();
+
+}
+
+
+/* ============================= */
+/* RECIPROCAL */
+/* ============================= */
 
 function reciprocal() {
 
     if (currentNumber === "") {
+
         return;
     }
 
@@ -345,12 +637,13 @@ function reciprocal() {
         );
 
         return;
-
     }
 
 
     const result =
-        roundResult(1 / number);
+        roundResult(
+            1 / number
+        );
 
 
     addHistory(
@@ -374,13 +667,14 @@ function reciprocal() {
 }
 
 
-// -------------------------
-// Percentage
-// -------------------------
+/* ============================= */
+/* PERCENTAGE */
+/* ============================= */
 
 function percentage() {
 
     if (currentNumber === "") {
+
         return;
     }
 
@@ -416,33 +710,24 @@ function percentage() {
 }
 
 
-// -------------------------
-// Plus / Minus
-// -------------------------
+/* ============================= */
+/* PLUS / MINUS */
+/* ============================= */
 
 function toggleSign() {
 
     if (currentNumber === "") {
+
         return;
     }
 
 
-    if (currentNumber === "0") {
-        return;
-    }
+    const number =
+        parseFloat(currentNumber);
 
 
-    if (currentNumber.startsWith("-")) {
-
-        currentNumber =
-            currentNumber.substring(1);
-
-    } else {
-
-        currentNumber =
-            "-" + currentNumber;
-
-    }
+    currentNumber =
+        (-number).toString();
 
 
     updateDisplay();
@@ -450,13 +735,14 @@ function toggleSign() {
 }
 
 
-// -------------------------
-// Delete
-// -------------------------
+/* ============================= */
+/* DELETE */
+/* ============================= */
 
 function deleteNumber() {
 
     if (shouldResetDisplay) {
+
         return;
     }
 
@@ -468,7 +754,6 @@ function deleteNumber() {
     if (currentNumber === "") {
 
         currentNumber = "0";
-
     }
 
 
@@ -477,9 +762,9 @@ function deleteNumber() {
 }
 
 
-// -------------------------
-// Clear
-// -------------------------
+/* ============================= */
+/* ALL CLEAR */
+/* ============================= */
 
 function clearCalculator() {
 
@@ -498,85 +783,111 @@ function clearCalculator() {
 }
 
 
-// -------------------------
-// Display
-// -------------------------
+/* ============================= */
+/* MEMORY CLEAR */
+/* ============================= */
 
-function updateDisplay() {
+function memoryClear() {
 
-    display.innerText =
-        currentNumber || "0";
+    memory = 0;
 
 }
 
 
-// -------------------------
-// Symbols
-// -------------------------
+/* ============================= */
+/* MEMORY RECALL */
+/* ============================= */
 
-function getSymbol(operator) {
+function memoryRecall() {
 
-    switch (operator) {
+    currentNumber =
+        memory.toString();
 
-        case "+":
-            return "+";
+    shouldResetDisplay = false;
 
-        case "-":
-            return "−";
+    updateDisplay();
 
-        case "*":
-            return "×";
+}
 
-        case "/":
-            return "÷";
 
-        case "^":
-            return "^";
+/* ============================= */
+/* MEMORY ADD */
+/* ============================= */
 
-        default:
-            return "";
+function memoryAdd() {
 
+    if (currentNumber === "") {
+
+        return;
     }
 
-}
 
-
-// -------------------------
-// Round
-// -------------------------
-
-function roundResult(number) {
-
-    return Math.round(
-        (number + Number.EPSILON) *
-        100000000
-    ) / 100000000;
+    memory +=
+        parseFloat(currentNumber);
 
 }
 
 
-// -------------------------
-// Error
-// -------------------------
+/* ============================= */
+/* MEMORY SUBTRACT */
+/* ============================= */
 
-function showError(message) {
+function memorySubtract() {
 
-    display.innerText = message;
+    if (currentNumber === "") {
 
-    currentNumber = "";
+        return;
+    }
 
-    previousNumber = "";
 
-    operator = null;
-
-    shouldResetDisplay = true;
+    memory -=
+        parseFloat(currentNumber);
 
 }
 
 
-// -------------------------
-// History
-// -------------------------
+/* ============================= */
+/* COPY RESULT */
+/* ============================= */
+
+function copyResult() {
+
+    const result =
+        display.innerText;
+
+
+    if (
+        result === "0" ||
+        result === ""
+    ) {
+
+        return;
+    }
+
+
+    navigator.clipboard
+        .writeText(result)
+        .then(() => {
+
+            alert(
+                "Result copied!"
+            );
+
+        })
+        .catch(() => {
+
+            alert(
+                "Unable to copy result"
+            );
+
+        });
+
+}
+
+
+/* ============================= */
+/* ADD HISTORY */
+/* ============================= */
 
 function addHistory(calculation) {
 
@@ -609,9 +920,9 @@ function addHistory(calculation) {
 }
 
 
-// -------------------------
-// Show History
-// -------------------------
+/* ============================= */
+/* SHOW HISTORY */
+/* ============================= */
 
 function showHistory() {
 
@@ -626,25 +937,26 @@ function showHistory() {
     historyList.innerHTML = "";
 
 
-    history.forEach(
-        function(item) {
+    history.forEach(item => {
 
-            const li =
-                document.createElement("li");
+        const li =
+            document.createElement("li");
 
-            li.textContent = item;
 
-            historyList.appendChild(li);
+        li.textContent =
+            item;
 
-        }
-    );
+
+        historyList.appendChild(li);
+
+    });
 
 }
 
 
-// -------------------------
-// Clear History
-// -------------------------
+/* ============================= */
+/* CLEAR HISTORY */
+/* ============================= */
 
 function clearHistory() {
 
@@ -658,53 +970,86 @@ function clearHistory() {
 }
 
 
-// -------------------------
-// Copy Result
-// -------------------------
+/* ============================= */
+/* ERROR */
+/* ============================= */
 
-function copyResult() {
+function showError(message) {
 
-    const result =
-        display.innerText;
-
-
-    if (
-        result === "0" ||
-        result === ""
-    ) {
-
-        return;
-
-    }
+    display.innerText =
+        message;
 
 
-    navigator.clipboard
-        .writeText(result)
-        .then(
-            function() {
+    currentNumber = "";
 
-                alert(
-                    "Result copied!"
-                );
+    previousNumber = "";
 
-            }
-        )
-        .catch(
-            function() {
+    operator = null;
 
-                alert(
-                    "Unable to copy result"
-                );
-
-            }
-        );
+    shouldResetDisplay = true;
 
 }
 
 
-// -------------------------
-// Theme
-// -------------------------
+/* ============================= */
+/* ROUND RESULT */
+/* ============================= */
+
+function roundResult(number) {
+
+    return Math.round(
+        (number + Number.EPSILON) *
+        100000000
+    ) / 100000000;
+
+}
+
+
+/* ============================= */
+/* OPERATOR SYMBOLS */
+/* ============================= */
+
+function getSymbol(operator) {
+
+    switch (operator) {
+
+        case "+":
+
+            return "+";
+
+
+        case "-":
+
+            return "−";
+
+
+        case "*":
+
+            return "×";
+
+
+        case "/":
+
+            return "÷";
+
+
+        case "^":
+
+            return "^";
+
+
+        default:
+
+            return "";
+
+    }
+
+}
+
+
+/* ============================= */
+/* THEME */
+/* ============================= */
 
 function toggleTheme() {
 
@@ -729,9 +1074,9 @@ function toggleTheme() {
 }
 
 
-// -------------------------
-// Load Theme
-// -------------------------
+/* ============================= */
+/* LOAD THEME */
+/* ============================= */
 
 function loadTheme() {
 
@@ -752,9 +1097,9 @@ function loadTheme() {
 }
 
 
-// -------------------------
-// Keyboard
-// -------------------------
+/* ============================= */
+/* KEYBOARD SUPPORT */
+/* ============================= */
 
 document.addEventListener(
     "keydown",
@@ -764,7 +1109,7 @@ document.addEventListener(
             event.key;
 
 
-        // Numbers
+        /* NUMBERS */
 
         if (
             key >= "0" &&
@@ -776,7 +1121,7 @@ document.addEventListener(
         }
 
 
-        // Decimal
+        /* DECIMAL */
 
         else if (key === ".") {
 
@@ -785,7 +1130,7 @@ document.addEventListener(
         }
 
 
-        // Operators
+        /* OPERATORS */
 
         else if (
             key === "+" ||
@@ -799,7 +1144,7 @@ document.addEventListener(
         }
 
 
-        // Enter
+        /* ENTER */
 
         else if (
             key === "Enter" ||
@@ -813,7 +1158,7 @@ document.addEventListener(
         }
 
 
-        // Backspace
+        /* BACKSPACE */
 
         else if (
             key === "Backspace"
@@ -824,7 +1169,7 @@ document.addEventListener(
         }
 
 
-        // Escape
+        /* ESCAPE */
 
         else if (
             key === "Escape"
@@ -835,7 +1180,7 @@ document.addEventListener(
         }
 
 
-        // Percentage
+        /* PERCENTAGE */
 
         else if (
             key === "%"
@@ -846,7 +1191,7 @@ document.addEventListener(
         }
 
 
-        // Square root
+        /* ROOT */
 
         else if (
             key.toLowerCase() === "r"
@@ -857,7 +1202,7 @@ document.addEventListener(
         }
 
 
-        // Square
+        /* SQUARE */
 
         else if (
             key.toLowerCase() === "s"
@@ -871,7 +1216,9 @@ document.addEventListener(
 );
 
 
-// Start
+/* ============================= */
+/* START CALCULATOR */
+/* ============================= */
 
 loadTheme();
 
